@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Essência Perfumaria - perfumes, body splash, hidratantes e kits para presente.">
+  <title>Essência Perfumaria</title>
+  <style>
+    :root{
+      --rosa:#c9828e;
+      --rosa-escuro:#8e4e5a;
+      --rosa-claro:#f8e7e8;
+      --creme:#fffaf5;
+      --dourado:#b99755;
+      --texto:#4d3a3a;
+      --branco:#fff;
+      --sombra:0 8px 25px rgba(100,55,60,.12);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--texto);
+      background:var(--creme);
+      line-height:1.5;
+    }
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+
+    /* Cabeçalho */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,250,245,.96);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid #ead2c9;
+      box-shadow:0 2px 12px rgba(80,40,40,.08);
+    }
+    .nav{
+      max-width:1150px;
+      margin:auto;
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:12px 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--rosa-escuro);
+    }
+    .logo-icon{font-size:30px}
+    .logo strong{
+      display:block;
+      font-size:22px;
+      letter-spacing:1px;
+    }
+    .logo span{
+      display:block;
+      font-size:13px;
+      font-style:italic;
+      color:var(--dourado);
+      margin-top:-4px;
+    }
+    .links{
+      display:flex;
+      align-items:center;
+      gap:25px;
+      font-size:15px;
+    }
+    .links a{
+      transition:.25s;
+    }
+    .links a:hover{color:var(--rosa)}
+    .cart-btn{
+      border:0;
+      background:var(--rosa-escuro);
+      color:#fff;
+      border-radius:25px;
+      padding:10px 16px;
+      cursor:pointer;
+      transition:.25s;
+    }
+    .cart-btn:hover{transform:translateY(-2px);background:#743d48}
+    .hamb{
+      display:none;
+      border:0;
+      background:none;
+      font-size:28px;
+      color:var(--rosa-escuro);
+      cursor:pointer;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:540px;
+      display:flex;
+      align-items:center;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255,255,255,.9), transparent 28%),
+        radial-gradient(circle at 90% 75%, rgba(242,192,195,.5), transparent 32%),
+        linear-gradient(135deg,#fffaf5 0%,#f8e5e4 48%,#fffaf5 100%);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before,.hero:after{
+      content:"✿";
+      position:absolute;
+      color:rgba(185,151,85,.22);
+      font-size:170px;
+      line-height:1;
+    }
+    .hero:before{left:-30px;top:10px}
+    .hero:after{right:-25px;bottom:-20px}
+    .hero-inner{
+      width:min(1150px,100%);
+      margin:auto;
+      padding:65px 25px;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      align-items:center;
+      gap:40px;
+      position:relative;
+      z-index:1;
+    }
+    .hero-text small{
+      color:var(--dourado);
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:13px;
+    }
+    .hero-text h1{
+      font-size:clamp(42px,6vw,70px);
+      line-height:1.05;
+      color:var(--rosa-escuro);
+      margin:10px 0 18px;
+    }
+    .hero-text h1 em{
+      display:block;
+      font-size:.48em;
+      color:var(--dourado);
+      font-weight:normal;
+      margin-top:8px;
+    }
+    .hero-text p{
+      max-width:560px;
+      font-size:18px;
+      margin-bottom:28px;
+    }
+    .cta{
+      display:inline-block;
+      background:var(--rosa-escuro);
+      color:#fff;
+      padding:13px 25px;
+      border-radius:28px;
+      box-shadow:var(--sombra);
+      transition:.25s;
+    }
+    .cta:hover{transform:translateY(-3px)}
+    .hero-bottle{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:340px;
+    }
+    .bottle{
+      width:170px;
+      height:250px;
+      border-radius:32px 32px 22px 22px;
+      background:linear-gradient(90deg,#e5a4a9,#fff1e7,#d99099);
+      border:3px solid rgba(142,78,90,.25);
+      box-shadow:0 25px 45px rgba(115,63,70,.22);
+      position:relative;
+      animation:float 3s ease-in-out infinite;
+    }
+    .bottle:before{
+      content:"";
+      position:absolute;
+      width:55px;height:45px;
+      left:50%;top:-48px;
+      transform:translateX(-50%);
+      border:3px solid #b99755;
+      border-bottom:0;
+      border-radius:9px 9px 0 0;
+    }
+    .bottle:after{
+      content:"ESSÊNCIA\A Perfumaria";
+      white-space:pre;
+      position:absolute;
+      left:20px;right:20px;top:88px;
+      text-align:center;
+      background:rgba(255,250,245,.85);
+      padding:13px 4px;
+      color:var(--rosa-escuro);
+      font-size:15px;
+      border-radius:5px;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(-2deg)}
+      50%{transform:translateY(-13px) rotate(2deg)}
+    }
+
+    section{padding:70px 20px}
+    .container{max-width:1150px;margin:auto}
+    .section-title{text-align:center;margin-bottom:35px}
+    .section-title small{
+      color:var(--dourado);
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+    .section-title h2{
+      color:var(--rosa-escuro);
+      font-size:34px;
+      margin:4px 0;
+    }
+    .section-title p{color:#765f5f}
+
+    /* Categorias */
+    .categories{
+      background:#fff;
+    }
+    .category-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .category{
+      padding:28px 18px;
+      text-align:center;
+      border:1px solid #ecd8d0;
+      border-radius:18px;
+      background:linear-gradient(145deg,#fff,#fff6f1);
+      transition:.3s;
+      cursor:pointer;
+    }
+    .category:hover{transform:translateY(-6px);box-shadow:var(--sombra)}
+    .category .emoji{font-size:42px}
+    .category h3{color:var(--rosa-escuro);margin-top:8px}
+    .category p{font-size:14px;color:#7d6969}
+
+    /* Produtos */
+    .products-section{background:var(--rosa-claro)}
+    .filters{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:30px;
+    }
+    .filter{
+      border:1px solid #d8a8ad;
+      background:#fff;
+      color:var(--rosa-escuro);
+      border-radius:22px;
+      padding:8px 17px;
+      cursor:pointer;
+    }
+    .filter.active,.filter:hover{
+      background:var(--rosa-escuro);
+      color:#fff;
+    }
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+    .card{
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 5px 18px rgba(100,55,60,.08);
+      transition:.3s;
+      position:relative;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:var(--sombra)}
+    .card-img{
+      height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(145deg,#fffaf5,#f4dddd);
+      font-size:72px;
+    }
+    .card-content{padding:18px}
+    .tag{
+      display:inline-block;
+      font-size:11px;
+      color:var(--rosa-escuro);
+      background:#f9e8e7;
+      padding:4px 8px;
+      border-radius:10px;
+      margin-bottom:7px;
+    }
+    .card h3{font-size:18px;color:#513e3e}
+    .card p{font-size:13px;color:#806d6d;min-height:40px}
+    .price{
+      font-size:20px;
+      font-weight:bold;
+      color:var(--rosa-escuro);
+      margin:10px 0;
+    }
+    .buy{
+      width:100%;
+      border:0;
+      background:var(--rosa-escuro);
+      color:#fff;
+      border-radius:10px;
+      padding:10px;
+      cursor:pointer;
+      transition:.25s;
+    }
+    .buy:hover{background:#743d48}
+
+    /* Sobre */
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:45px;
+      align-items:center;
+    }
+    .about-box{
+      background:#fff;
+      padding:35px;
+      border-radius:20px;
+      box-shadow:var(--sombra);
+      border:1px solid #edd9cf;
+    }
+    .about h2{color:var(--rosa-escuro);font-size:32px;margin-bottom:15px}
+    .benefits{display:grid;gap:14px;margin-top:22px}
+    .benefit{display:flex;gap:12px;align-items:center}
+    .benefit b{color:var(--rosa-escuro)}
+    .ornament{
+      min-height:350px;
+      border-radius:30px;
+      background:
+        radial-gradient(circle at 25% 30%,#f3c7c7 0 8%,transparent 9%),
+        radial-gradient(circle at 75% 60%,#e9b0b5 0 7%,transparent 8%),
+        linear-gradient(135deg,#f9e6e3,#fffaf5);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:100px;
+      box-shadow:var(--sombra);
+    }
+
+    /* Contato */
+    .contact{background:#fff}
+    .contact-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .contact-card{
+      text-align:center;
+      padding:25px;
+      border:1px solid #ead6ce;
+      border-radius:16px;
+    }
+    .contact-card div{font-size:32px}
+    .contact-card h3{color:var(--rosa-escuro);margin:5px}
+
+    footer{
+      background:var(--rosa-escuro);
+      color:#fff7f4;
+      padding:30px 20px;
+      text-align:center;
+    }
+    footer strong{font-size:22px}
+    footer p{font-size:13px;margin-top:8px;opacity:.9}
+
+    /* Carrinho */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(40,20,20,.45);
+      z-index:2000;
+      display:none;
+    }
+    .overlay.show{display:block}
+    .cart{
+      position:absolute;
+      right:0;
+      top:0;
+      height:100%;
+      width:min(420px,100%);
+      background:#fffaf7;
+      padding:25px;
+      overflow:auto;
+      box-shadow:-10px 0 30px rgba(0,0,0,.18);
+    }
+    .cart-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #ead5cd;
+      padding-bottom:15px;
+    }
+    .cart-head h2{color:var(--rosa-escuro)}
+    .close{
+      border:0;background:none;font-size:27px;cursor:pointer;color:var(--rosa-escuro)
+    }
+    .cart-item{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:15px 0;
+      border-bottom:1px solid #eee0da;
+    }
+    .cart-item small{display:block;color:#806d6d}
+    .remove{
+      border:0;background:none;color:#a04f59;cursor:pointer;font-size:12px
+    }
+    .total{
+      display:flex;
+      justify-content:space-between;
+      font-weight:bold;
+      font-size:19px;
+      padding:20px 0;
+      color:var(--rosa-escuro);
+    }
+    .checkout{
+      width:100%;
+      border:0;
+      padding:13px;
+      border-radius:10px;
+      background:#25a45b;
+      color:white;
+      cursor:pointer;
+    }
+
+    @media(max-width:900px){
+      .links{
+        position:absolute;
+        top:76px;left:0;right:0;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+        background:#fffaf5;
+        border-bottom:1px solid #ead2c9;
+      }
+      .links.open{display:flex}
+      .links a,.links .cart-btn{padding:15px 22px;border-radius:0}
+      .hamb{display:block}
+      .hero-inner{grid-template-columns:1fr;text-align:center}
+      .hero-text p{margin-left:auto;margin-right:auto}
+      .hero-bottle{min-height:280px}
+      .products{grid-template-columns:repeat(2,1fr)}
+      .about{grid-template-columns:1fr}
+    }
+
+    @media(max-width:600px){
+      .nav{min-height:66px;padding:10px 15px}
+      .logo strong{font-size:18px}
+      .logo-icon{font-size:24px}
+      .hero{min-height:auto}
+      .hero-inner{padding:55px 18px}
+      .hero-text h1{font-size:43px}
+      .hero-text p{font-size:16px}
+      .bottle{width:135px;height:205px}
+      .bottle:after{top:70px;font-size:12px}
+      .category-grid,.contact-grid{grid-template-columns:1fr}
+      section{padding:55px 15px}
+      .section-title h2{font-size:28px}
+      .products{grid-template-columns:1fr}
+      .card-img{height:200px}
+      .about-box{padding:25px}
+      .ornament{min-height:230px;font-size:70px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#inicio">
+      <div class="logo-icon">🌸</div>
+      <div><strong>ESSÊNCIA</strong><span>Perfumaria</span></div>
+    </a>
+
+    <button class="hamb" id="hamb" aria-label="Abrir menu">☰</button>
+
+    <div class="links" id="links">
+      <a href="#inicio">Início</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#contato">Contato</a>
+      <button class="cart-btn" onclick="openCart()">🛍️ Carrinho (<span id="cartCount">0</span>)</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <small>Perfumes que marcam momentos especiais</small>
+        <h1>Essência Perfumaria <em>beleza, aroma e elegância</em></h1>
+        <p>Encontre fragrâncias para todos os estilos e ocasiões, com atendimento especial e produtos escolhidos com carinho.</p>
+        <a href="#produtos" class="cta">Ver produtos ✨</a>
+      </div>
+      <div class="hero-bottle">
+        <div class="bottle"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categorias">
+    <div class="container">
+      <div class="section-title">
+        <small>Encontre sua essência</small>
+        <h2>Nossas categorias</h2>
+        <p>Produtos para deixar cada momento ainda mais especial.</p>
+      </div>
+
+      <div class="category-grid">
+        <div class="category" onclick="filterProducts('importados')">
+          <div class="emoji">🌹</div>
+          <h3>Perfumes Importados</h3>
+          <p>Fragrâncias marcantes e sofisticadas.</p>
+        </div>
+        <div class="category" onclick="filterProducts('nacionais')">
+          <div class="emoji">🌷</div>
+          <h3>Perfumes Nacionais</h3>
+          <p>Qualidade e aromas para o dia a dia.</p>
+        </div>
+        <div class="category" onclick="filterProducts('body')">
+          <div class="emoji">🧴</div>
+          <h3>Body Splash</h3>
+          <p>Leveza e frescor para sua rotina.</p>
+        </div>
+        <div class="category" onclick="filterProducts('hidratantes')">
+          <div class="emoji">💗</div>
+          <h3>Hidratantes Corporais</h3>
+          <p>Pele macia e perfumada.</p>
+        </div>
+        <div class="category" onclick="filterProducts('kits')">
+          <div class="emoji">🎁</div>
+          <h3>Kits para Presente</h3>
+          <p>Presentes preparados com carinho.</p>
+        </div>
+        <div class="category" onclick="filterProducts('ambiente')">
+          <div class="emoji">🕯️</div>
+          <h3>Aromatizadores</h3>
+          <p>Perfume e aconchego para sua casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products-section" id="produtos">
+    <div class="container">
+      <div class="section-title">
+        <small>Escolha seus favoritos</small>
+        <h2>Nossos produtos</h2>
+      </div>
+
+      <div class="filters">
+        <button class="filter active" onclick="filterProducts('todos')">Todos</button>
+        <button class="filter" onclick="filterProducts('importados')">Importados</button>
+        <button class="filter" onclick="filterProducts('nacionais')">Nacionais</button>
+        <button class="filter" onclick="filterProducts('body')">Body Splash</button>
+        <button class="filter" onclick="filterProducts('kits')">Kits</button>
+      </div>
+
+      <div class="products" id="productGrid"></div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="container about">
+      <div class="about-box">
+        <h2>Sobre a Essência</h2>
+        <p>Somos uma perfumaria criada para ajudar você a encontrar aromas que combinam com sua personalidade e transformam momentos em boas lembranças.</p>
+        <div class="benefits">
+          <div class="benefit"><span>✨</span><div><b>Produtos selecionados</b><br><small>Qualidade em cada escolha.</small></div></div>
+          <div class="benefit"><span>💝</span><div><b>Atendimento especial</b><br><small>Estamos aqui para ajudar você.</small></div></div>
+          <div class="benefit"><span>🎁</span><div><b>Opções para presente</b><br><small>Kits lindos para ocasiões especiais.</small></div></div>
+        </div>
+      </div>
+      <div class="ornament">🌸 🧴 🌷</div>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="container">
+      <div class="section-title">
+        <small>Fale conosco</small>
+        <h2>Entre em contato</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div>📱</div>
+          <h3>WhatsApp</h3>
+          <p>(41) 9XXXX-XXXX</p>
+        </div>
+        <div class="contact-card">
+          <div>📸</div>
+          <h3>Instagram</h3>
+          <p>@essenciaperfumaria_oficial</p>
+        </div>
+        <div class="contact-card">
+          <div>📍</div>
+          <h3>Endereço</h3>
+          <p>Rua das Flores, 123 - Centro</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>🌸 Essência Perfumaria</strong>
+  <p>Perfumes que marcam momentos especiais.</p>
+  <p>© 2026 Essência Perfumaria — Todos os direitos reservados.</p>
+</footer>
+
+<!-- Carrinho -->
+<div class="overlay" id="overlay" onclick="closeCart(event)">
+  <aside class="cart" onclick="event.stopPropagation()">
+    <div class="cart-head">
+      <h2>🛍️ Meu carrinho</h2>
+      <button class="close" onclick="closeCart()">×</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="total">
+      <span>Total</span>
+      <span>R$ <span id="cartTotal">0,00</span></span>
+    </div>
+    <button class="checkout" onclick="checkout()">Finalizar pedido pelo WhatsApp</button>
+  </aside>
+</div>
+
+<script>
+  const products = [
+    {id:1,name:"Eternal Rose",category:"importados",tag:"Importado",desc:"Fragrância floral elegante e marcante.",price:189.90,emoji:"🌹"},
+    {id:2,name:"Royal Bloom",category:"importados",tag:"Importado",desc:"Aroma sofisticado para ocasiões especiais.",price:229.90,emoji:"🌸"},
+    {id:3,name:"Essência Floral",category:"nacionais",tag:"Nacional",desc:"Perfume delicado para todos os dias.",price:119.90,emoji:"🌷"},
+    {id:4,name:"Doce Encanto",category:"nacionais",tag:"Nacional",desc:"Notas doces e envolventes.",price:109.90,emoji:"🌺"},
+    {id:5,name:"Cherry Body Splash",category:"body",tag:"Body Splash",desc:"Frescor e suavidade com toque frutado.",price:59.90,emoji:"🍒"},
+    {id:6,name:"Flor de Pêssego",category:"body",tag:"Body Splash",desc:"Fragrância leve, fresca e feminina.",price:64.90,emoji:"🍑"},
+    {id:7,name:"Kit Amor & Flores",category:"kits",tag:"Presente",desc:"Perfume + hidratante em uma linda embalagem.",price:159.90,emoji:"🎁"},
+    {id:8,name:"Kit Essência",category:"kits",tag:"Presente",desc:"Uma combinação especial para presentear.",price:179.90,emoji:"💝"},
+    {id:9,name:"Hidratante Rosas",category:"hidratantes",tag:"Hidratante",desc:"Pele macia e perfumada.",price:49.90,emoji:"🧴"},
+    {id:10,name:"Aroma de Casa",category:"ambiente",tag:"Ambiente",desc:"Aromatizador floral para deixar sua casa aconchegante.",price:54.90,emoji:"🕯️"}
+  ];
+
+  let cart = JSON.parse(localStorage.getItem("essenciaCart") || "[]");
+
+  function money(value){
+    return value.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+
+  function renderProducts(category="todos"){
+    const grid = document.getElementById("productGrid");
+    const list = category==="todos" ? products : products.filter(p=>p.category===category);
+    grid.innerHTML = list.map(p => `
+      <article class="card">
+        <div class="card-img">${p.emoji}</div>
+        <div class="card-content">
+          <span class="tag">${p.tag}</span>
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="price">R$ ${money(p.price)}</div>
+          <button class="buy" onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  function filterProducts(category){
+    renderProducts(category);
+    document.querySelectorAll(".filter").forEach(btn=>btn.classList.remove("active"));
+    const btn = [...document.querySelectorAll(".filter")].find(b =>
+      b.textContent.toLowerCase().includes(category==="todos" ? "todos" : category)
+    );
+    if(btn) btn.classList.add("active");
+    document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
+  }
+
+  function addToCart(id){
+    const product = products.find(p=>p.id===id);
+    const existing = cart.find(p=>p.id===id);
+    if(existing) existing.qty++;
+    else cart.push({...product,qty:1});
+    saveCart();
+    openCart();
+  }
+
+  function removeFromCart(id){
+    cart = cart.filter(p=>p.id!==id);
+    saveCart();
+  }
+
+  function saveCart(){
+    localStorage.setItem("essenciaCart",JSON.stringify(cart));
+    renderCart();
+  }
+
+  function renderCart(){
+    const items = document.getElementById("cartItems");
+    const count = cart.reduce((sum,p)=>sum+p.qty,0);
+    const total = cart.reduce((sum,p)=>sum+p.price*p.qty,0);
+    document.getElementById("cartCount").textContent=count;
+    document.getElementById("cartTotal").textContent=money(total);
+
+    if(!cart.length){
+      items.innerHTML="<p style='padding:25px 0;text-align:center;color:#806d6d'>Seu carrinho está vazio 🌸</p>";
+      return;
+    }
+
+    items.innerHTML=cart.map(p=>`
+      <div class="cart-item">
+        <div>
+          <b>${p.emoji} ${p.name}</b>
+          <small>${p.qty} x R$ ${money(p.price)}</small>
+        </div>
+        <button class="remove" onclick="removeFromCart(${p.id})">Remover</button>
+      </div>
+    `).join("");
+  }
+
+  function openCart(){
+    document.getElementById("overlay").classList.add("show");
+    renderCart();
+  }
+
+  function closeCart(e){
+    if(!e || e.target===document.getElementById("overlay"))
+      document.getElementById("overlay").classList.remove("show");
+  }
+
+  function checkout(){
+    if(!cart.length){
+      alert("Adicione algum produto ao carrinho primeiro.");
+      return;
+    }
+    const lines=cart.map(p=>`${p.qty}x ${p.name} - R$ ${money(p.price*p.qty)}`);
+    const total=cart.reduce((s,p)=>s+p.price*p.qty,0);
+    const message=`Olá! Quero fazer um pedido na Essência Perfumaria:%0A%0A${lines.join("%0A")}%0A%0ATotal: R$ ${money(total)}%0A%0APoderiam me informar as opções de pagamento e entrega?`;
+    window.open(`https://wa.me/5541999999999?text=${message}`,"_blank");
+  }
+
+  document.getElementById("hamb").addEventListener("click",()=>{
+    document.getElementById("links").classList.toggle("open");
+  });
+
+  document.querySelectorAll(".links a").forEach(a=>{
+    a.addEventListener("click",()=>document.getElementById("links").classList.remove("open"));
+  });
+
+  renderProducts();
+  renderCart();
+</script>
+</body>
+</html>
